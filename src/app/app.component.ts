@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Model, todoItem} from './model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todoList';
+  model = new Model;
+  isDisplay = false;
+
+  getName() {
+    return this.model.user;
+  }
+
+  getItems() {
+    if (this.isDisplay) {
+      return this.model.items;
+    }
+    return this.model.items.filter(item => !item.action);
+  }
+
+  addItem(value) {
+    this.model.items.push(new todoItem(value,false));
+  }
+
 }
